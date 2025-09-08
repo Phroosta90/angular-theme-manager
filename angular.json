@@ -56,7 +56,8 @@
               {
                 "glob": "**/*",
                 "input": "projects/demo-app/public"
-              }
+              },
+              "projects/demo-app/src/assets"
             ],
             "styles": [
               "projects/demo-app/src/styles.scss"

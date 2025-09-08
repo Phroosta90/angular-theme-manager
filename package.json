@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "dev:lib": "ng build theme-manager --watch",
+    "dev:app": "ng serve demo-app",
+    "dev": "npm-run-all --parallel dev:lib dev:app"
   },
   "prettier": {
     "printWidth": 100,
@@ -37,6 +40,7 @@
     "@angular/cli": "^20.2.2",
     "@angular/compiler-cli": "^20.2.0",
     "@types/jasmine": "~5.1.0",
+    "install": "^0.13.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -44,6 +48,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.2.0",
+    "npm": "^11.6.0",
+    "npm-run-all": "^4.1.5",
     "typescript": "~5.9.2"
   }
 }

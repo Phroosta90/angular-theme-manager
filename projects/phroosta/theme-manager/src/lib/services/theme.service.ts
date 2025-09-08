@@ -9,6 +9,7 @@ import { THEME_MANAGER_CONFIG } from '../tokens/theme-config.token';
 export class ThemeService {
   private lastLightThemeId?: string;
   private lastDarkThemeId?: string;
+  private initialized = false;
 
   private mediaQueryListener?: (e: MediaQueryListEvent) => void;
   private darkModeQuery?: MediaQueryList;
@@ -39,11 +40,19 @@ export class ThemeService {
       ...config
     }
 
-    this.initializeTheme();
-    this.setupEffect();
+    if (this.config.themes && this.config.themes.length > 0) {
+      this.initializeTheme();
+      this.setupEffect();
+    } else {
+      // Altrimenti aspetta che vengano registrati
+      this.setupEffect();
+    }
   }
 
   private initializeTheme(): void {
+    if (this.initialized) return;
+    this.initialized = true;
+
     this.config.themes.forEach(theme => {
       this.availableThemes.set(theme.id, theme);
     });
@@ -53,7 +62,7 @@ export class ThemeService {
     if (savedThemeId) {
       const savedTheme = this.availableThemes.get(savedThemeId);
       if (savedTheme) {
-        this.setTheme(savedTheme.id);
+        this.applyThemeWithTracking(savedTheme);
         return;
       }
     }
@@ -74,6 +83,17 @@ export class ThemeService {
     if (defaultTheme) {
       this.applySystemTheme(defaultTheme);
     }
+  }
+
+  private applyThemeWithTracking(theme: Theme): void {
+    if (theme.isDark) {
+      this.lastDarkThemeId = theme.id;
+    } else {
+      this.lastLightThemeId = theme.id;
+    }
+    
+    this.currentThemeSignal.set(theme);
+    this.isDarkModeSignal.set(theme.isDark);
   }
 
   private getSystemPreferredTheme(): Theme | undefined {
@@ -139,23 +159,41 @@ export class ThemeService {
     const currentTheme = this.currentTheme();
     if (!currentTheme) return;
     
+    // Log per debug
+    if (this.config.enableLogging) {
+      console.log('Current theme:', currentTheme.id, 'isDark:', currentTheme.isDark);
+      console.log('Last light theme:', this.lastLightThemeId);
+      console.log('Last dark theme:', this.lastDarkThemeId);
+      console.log('Available themes:', Array.from(this.availableThemes.keys()));
+    }
+    
     let targetThemeId: string | undefined;
     
     if (currentTheme.isDark) {
+      // Trova un tema light
       targetThemeId = this.lastLightThemeId || 
                       this.findDefaultThemeByMode(false)?.id;
     } else {
+      // Trova un tema dark
       targetThemeId = this.lastDarkThemeId || 
                       this.findDefaultThemeByMode(true)?.id;
     }
     
+    if (this.config.enableLogging) {
+      console.log('Target theme ID:', targetThemeId);
+    }
+    
     if (targetThemeId) {
       this.setTheme(targetThemeId);
+    } else {
+      console.warn('No theme found for mode:', currentTheme.isDark ? 'light' : 'dark');
     }
   }
 
   private findDefaultThemeByMode(isDark: boolean): Theme | undefined {
-    return this.config.themes.find(theme => theme.isDark === isDark);
+    // Cerca tra TUTTI i temi disponibili, non solo quelli in config
+    return Array.from(this.availableThemes.values())
+      .find(theme => theme.isDark === isDark);
   }
 
   cycleTheme(): void {
@@ -246,6 +284,15 @@ export class ThemeService {
 
   registerTheme(theme: Theme): void {
     this.availableThemes.set(theme.id, theme);
+    
+    // Se è il primo tema registrato e non abbiamo ancora inizializzato
+    if (!this.initialized && this.availableThemes.size > 0) {
+      this.initializeTheme();
+    }
+    
+    if (this.config.enableLogging) {
+      console.log(`Theme registered: ${theme.name}`);
+    }
   }
 
   ngOnDestroy(): void {
