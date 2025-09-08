@@ -1,63 +1,26 @@
-# ThemeManager
+# Angular Theme Manager 🎨
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.0.
+[![npm version](https://img.shields.io/npm/v/@your-scope/theme-manager.svg)](https://www.npmjs.com/package/@your-scope/theme-manager)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Angular](https://img.shields.io/badge/Angular-16%2B-red)](https://angular.io/)
 
-## Code scaffolding
+A powerful, flexible theme management library for Angular applications with runtime theme switching, dark mode support, and white-label capabilities.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## ✨ Features
 
-```bash
-ng generate component component-name
-```
+- 🌓 **Dark/Light Mode Toggle** - Seamless switching between color schemes
+- 🎨 **Multiple Themes** - Support for unlimited custom themes
+- 💾 **Persistence** - Remembers user's theme preference
+- 🔄 **Runtime Switching** - Change themes without page reload
+- 📱 **System Preference Detection** - Automatically follows OS theme
+- 🏢 **White-label Ready** - Perfect for multi-tenant applications
+- ⚡ **Performance Optimized** - Uses Angular Signals for efficient updates
+- 🎯 **Type-Safe** - Full TypeScript support with interfaces
+- 📦 **Tree-Shakeable** - Only import what you need
+- 🔧 **Customizable** - Extensive configuration options
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
-
-```bash
-ng build theme-manager
-```
-
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
-
-### Publishing the Library
-
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/theme-manager
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 📦 Installation
 
 ```bash
-ng test
+npm install @phroosta/theme-manager
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
