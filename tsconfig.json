@@ -5,7 +5,10 @@
   "compilerOptions": {
     "paths": {
       "@phroosta/theme-manager": [
-        "./dist/phroosta/theme-manager"
+        "./dist/@phroosta/theme-manager"
+      ],
+      "@phroosta/theme-manager/*": [
+        "./dist/@phroosta/theme-manager/*"
       ]
     },
     "strict": true,
