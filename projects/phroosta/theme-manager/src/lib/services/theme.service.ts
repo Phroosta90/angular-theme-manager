@@ -3,6 +3,14 @@ import { Theme } from '../models/theme.interface';
 import { ThemeManagerConfig } from '../models/theme-config.interface';
 import { THEME_MANAGER_CONFIG } from '../tokens/theme-config.token';
 
+/**
+ * Service for managing application themes
+ * @example
+ * ```typescript
+ * const themeService = inject(ThemeService);
+ * themeService.toggleDarkMode();
+ * ```
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -44,7 +52,6 @@ export class ThemeService {
       this.initializeTheme();
       this.setupEffect();
     } else {
-      // Altrimenti aspetta che vengano registrati
       this.setupEffect();
     }
   }
@@ -133,6 +140,15 @@ export class ThemeService {
     });
   }
 
+  /**
+   * Sets the active theme
+   * @param themeId - The unique identifier of the theme to apply
+   * @throws Will warn if theme ID is not found
+   * @example
+   * ```typescript
+   * themeService.setTheme('dark');
+   * ```
+   */
   setTheme(themeId: string): void {
     const theme = this.availableThemes.get(themeId);
     if (!theme) {
@@ -148,7 +164,7 @@ export class ThemeService {
 
     this.currentThemeSignal.set(theme);
     this.isDarkModeSignal.set(theme.isDark);
-    this.saveThemeId(themeId); // Salva la scelta utente
+    this.saveThemeId(themeId);
     
     if (this.config.enableLogging) {
       console.log(`Theme changed to: ${theme.name} (user choice)`);
@@ -170,11 +186,9 @@ export class ThemeService {
     let targetThemeId: string | undefined;
     
     if (currentTheme.isDark) {
-      // Trova un tema light
       targetThemeId = this.lastLightThemeId || 
                       this.findDefaultThemeByMode(false)?.id;
     } else {
-      // Trova un tema dark
       targetThemeId = this.lastDarkThemeId || 
                       this.findDefaultThemeByMode(true)?.id;
     }
@@ -191,7 +205,6 @@ export class ThemeService {
   }
 
   private findDefaultThemeByMode(isDark: boolean): Theme | undefined {
-    // Cerca tra TUTTI i temi disponibili, non solo quelli in config
     return Array.from(this.availableThemes.values())
       .find(theme => theme.isDark === isDark);
   }
@@ -285,7 +298,6 @@ export class ThemeService {
   registerTheme(theme: Theme): void {
     this.availableThemes.set(theme.id, theme);
     
-    // Se è il primo tema registrato e non abbiamo ancora inizializzato
     if (!this.initialized && this.availableThemes.size > 0) {
       this.initializeTheme();
     }
