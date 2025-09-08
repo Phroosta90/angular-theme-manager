@@ -1,6 +1,6 @@
 # Angular Theme Manager 🎨
 
-[![npm version](https://img.shields.io/npm/v/@your-scope/theme-manager.svg)](https://www.npmjs.com/package/@your-scope/theme-manager)
+[![npm version](https://img.shields.io/npm/v/@phroosta/theme-manager.svg)](https://www.npmjs.com/package/@your-scope/theme-manager)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Angular](https://img.shields.io/badge/Angular-16%2B-red)](https://angular.io/)
 
