@@ -1,9 +1,37 @@
 {
   "name": "@phroosta/theme-manager",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "A powerful theme management library for Angular with dark mode and white-label support",
+  "author": {
+    "name": "Alessandro Frustagli",
+    "email": "frustagli9390@gmail.com",
+    "url": "https://github.com/Phroosta90"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Phroosta90/angular-theme-manager",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phroosta90/angular-theme-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Phroosta90/angular-theme-manager/issues"
+  },
+  "keywords": [
+    "angular",
+    "theme",
+    "theming",
+    "dark-mode",
+    "light-mode",
+    "white-label",
+    "css-variables",
+    "theme-switcher",
+    "angular-library",
+    "typescript",
+    "signals"
+  ],
   "peerDependencies": {
-    "@angular/common": "^20.2.0",
-    "@angular/core": "^20.2.0"
+    "@angular/common": ">=16.0.0",
+    "@angular/core": ">=16.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

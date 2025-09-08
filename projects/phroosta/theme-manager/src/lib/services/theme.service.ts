@@ -171,6 +171,11 @@ export class ThemeService {
     }
   }
 
+  /**
+   * Toggles between light and dark mode themes
+   * @remarks
+   * Will remember the last used theme for each mode
+   */
   toggleDarkMode(): void {
     const currentTheme = this.currentTheme();
     if (!currentTheme) return;
@@ -295,6 +300,20 @@ export class ThemeService {
     return this.availableThemes.get(id);
   }
 
+  /**
+   * Registers a new theme dynamically
+   * @param theme - The theme configuration to register
+   * @example
+   * ```typescript
+   * const customTheme: Theme = {
+   *   id: 'custom',
+   *   name: 'Custom Theme',
+   *   isDark: false,
+   *   colors: { ... }
+   * };
+   * themeService.registerTheme(customTheme);
+   * ```
+   */
   registerTheme(theme: Theme): void {
     this.availableThemes.set(theme.id, theme);
     

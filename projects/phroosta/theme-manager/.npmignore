@@ -1,0 +1,11 @@
+*.ts
+!*.d.ts
+*.spec.ts
+*.spec.d.ts
+tsconfig.lib.json
+tsconfig.lib.prod.json
+tsconfig.spec.json
+.gitignore
+karma.conf.js
+ng-package.json
+src/test.ts
