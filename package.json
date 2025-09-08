@@ -6,10 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "dev:lib": "ng build theme-manager --watch",
-    "dev:app": "ng serve demo-app",
-    "dev": "npm-run-all --parallel dev:lib dev:app"
+    "test": "ng test"
   },
   "prettier": {
     "printWidth": 100,
