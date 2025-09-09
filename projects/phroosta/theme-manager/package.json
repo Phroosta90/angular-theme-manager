@@ -1,6 +1,6 @@
 {
   "name": "@phroosta/theme-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A powerful theme management library for Angular with dark mode and white-label support",
   "author": {
     "name": "Alessandro Frustagli",
